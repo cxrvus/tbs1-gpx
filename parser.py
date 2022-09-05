@@ -3,10 +3,20 @@ from os import listdir
 
 GPXDIR = './testdata'
 
-gpxFilePattern = r'^(?P<name>[a-z]{1,32})_(?P<polkz>[a-z]{1,3}-[a-z]{2}[- ]?P\d{1,4})_(?P<index>\d{3})\.gpx$'
+def parseAllFileNames(dir):
+	fileNameData = []
+	fileNames = listdir(dir)
+	for fileName in fileNames:
+		fileNameData.append(parseFileName(fileName))
+	return fileNameData
 
-files = listdir(GPXDIR)
-fileMatches = map(lambda x: re.match(gpxFilePattern, x, flags=re.I), files)
-validFileMatches = filter(lambda x: x, fileMatches)
+gpxFilePattern = re.compile(r'^(?P<name>[a-z]{1,32})_(?P<polkz>[a-z]{1,3}-?[a-z]{2}\d{1,4})_(?P<index>\d{3})\.gpx$', flags=re.I)
 
-print(str(list(files)))
+def parseFileName(fileName):
+	match = gpxFilePattern.match(fileName)
+	if match:
+		return match.groupdict()
+	else:
+		raise Exception(f'invalid match at {fileName}')
+
+print(parseAllFileNames(GPXDIR))
