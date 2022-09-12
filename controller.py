@@ -1,4 +1,4 @@
-from parser import parseAllFileNames
+from parser import parse_all_file_names
 
 GPXDIR = './testdata'
-print(parseAllFileNames(GPXDIR))
+print(parse_all_file_names(GPXDIR))
