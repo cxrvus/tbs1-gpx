@@ -1,0 +1,20 @@
+<html>
+	<head>
+		<script src="{{url_for('static', filename='index.js')}}"></script>
+	</head>
+	<body>
+		<div style="display:block">
+			<div style="display:inline">
+				<select>
+					<option value="" selected disabled hidden>--- Bitte Fahrt auswählen ---</option>
+					<option value="Fahrer0">Fahrer0</option>
+					<option value="Fahrer1">Fahrer1</option>
+					<option value="Fahrer2">Fahrer2</option>
+					<option value="Fahrer3">Fahrer3</option>
+				</select>
+				<button onlick="renderPath()">Anzeigen</button>
+			</div>
+			<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=7.217829823493958%2C51.479700775957525%2C7.219718098640443%2C51.48071974392932&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/>
+		</div>
+	</body>
+</html>
