@@ -12,6 +12,7 @@ def sync_tracks():
 		track = {
 			'fahrer_name': fileinfo['name'],
 			'fahrtzeug_polkz': fileinfo['polkz'],
+			'start_time': None,
 			'points': []
 		}
 
@@ -23,7 +24,8 @@ def sync_tracks():
 			if(len(gpx_data.tracks) > 0 and len(gpx_data.tracks[0].segments) > 0):
 				points = gpx_data.tracks[0].segments[0].points
 			else:
-				print(progress + 'failiure - ' + fileinfo['filename'])
+				print(f"{progress}failiure - {fileinfo['filename']}")
+				points = []
 				continue
 
 		for point in points:
@@ -35,29 +37,11 @@ def sync_tracks():
 			})
 
 		tracks.append(track)
+		print(f"{progress}success - {len(points)} points parsed")
 
-	with open('static/tracks.json', 'w') as target_json:
-		target_json.write(json.dumps(tracks, indent=4, sort_keys=True, default=str))
-
-	print(progress + 'success')
-
+	with open('static/tracks.js', 'w') as target_json:
+		json_tracks = json.dumps(tracks, indent=4, sort_keys=True, default=str)
+		json_script = f"const tracks = {json_tracks}"
+		target_json.write(json_script)
 
 sync_tracks()
-exit()
-
-"""
-for fileinfo in parsed_filenames:
-	db.amend_record('fahrer', 'name', fileinfo['name'])
-	db.amend_record('fahrzeug', 'polkz', fileinfo['polkz'])
-	# if not db.read_record('fahrt', 'dateiname', file['filename']):
-	if not False:
-		fid = db.amend_record('fahrer', 'name', fileinfo['name'])['fid']
-		fzid = db.amend_record('fahrzeug', 'polkz', fileinfo['polkz'])['fzid']
-		fahrt_record = {
-			'fid': fid,
-			'fzid': fzid,
-			'dateiname': fileinfo['filename']
-		}
-		fahrt_record = db.create_record('fahrt', fahrt_record)
-		fahrt_id = fahrt_record['ftid']
-"""
