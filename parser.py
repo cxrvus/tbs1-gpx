@@ -2,11 +2,13 @@ import re
 from os import listdir
 from gpxpy import parse as parse_gpx
 
-def parse_file(filename):
+def parse_points_from_file(filename):
 	with open(filename, 'r') as file:
 		gpx = parse_gpx(file)
-		points = gpx.get_points_data()
-		return gpx
+		if(len(gpx.tracks) == 0 or len(gpx.tracks[0].segments) == 0):
+			return []
+		points = gpx.tracks[0].segments[0].points
+		return points
 
 def parse_all_filenames(dir):
 	filename_data = []
@@ -25,3 +27,5 @@ def _parse_filename(fileName):
 		return match.groupdict()
 	else:
 		raise Exception(f'invalid match at {fileName}')
+
+parse_points_from_file('testdata/AA_WIT-AA000_001.gpx')
