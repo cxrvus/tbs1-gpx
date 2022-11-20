@@ -1,8 +1,18 @@
 <html>
 	<head>
+
 		<script src="{{url_for('static', filename='tracks.js')}}"></script>
 		<script src="{{url_for('static', filename='index.js')}}"></script>
 
+		<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+            integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+            crossorigin=""></script>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+		integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+		crossorigin="" />
+
+		<script src="{{url_for('static', filename='tmp.js')}}"></script>
+		
 	</head>
 
 	<body onload="init()" style="zoom:150%; padding:1cm">
@@ -10,7 +20,8 @@
 		<div style="display:block">
 			<select id="fahrtSelect" onchange="renderPath()"></select>
 		</div>
-		<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=7.217829823493958%2C51.479700775957525%2C7.219718098640443%2C51.48071974392932&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/>
+
+		<div id="map" style="height:360px;width:720px"></div>
 
 	</body>
 </html>
