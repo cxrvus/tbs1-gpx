@@ -1,9 +1,9 @@
 const init = () => {
+	window.fahrtSelect = document.getElementById('fahrtSelect')
 	listTracks()
 }
 
 const listTracks = () => { 
-	const fahrtSelect = document.getElementById('fahrtSelect')
 	fahrtSelect.innerHTML = '<option value="" selected disabled hidden>--- Bitte Fahrt auswählen ---</option>'
 	
 	tracks
@@ -17,7 +17,7 @@ const listTracks = () => {
 		)
 		.forEach((summary,i) => {
 			const option = document.createElement('option')
-			option.value = `track_${i}`
+			option.value = i
 			option.innerText = summary
 			fahrtSelect.appendChild(option)
 		})
@@ -25,5 +25,6 @@ const listTracks = () => {
 }
 
 const renderPath = () => {
-	alert('Path wird gerendert ya seleme')
+	const chosenTrack = tracks[parseInt(fahrtSelect.value)]
+	console.log(chosenTrack)
 }
