@@ -23,6 +23,8 @@ def sync_tracks():
 
 			if(len(gpx_data.tracks) > 0 and len(gpx_data.tracks[0].segments) > 0):
 				points = gpx_data.tracks[0].segments[0].points
+				if(not track['start_time']):
+					track['start_time'] = points[0].time
 			else:
 				print(f"{progress}failiure - {fileinfo['filename']}")
 				points = []

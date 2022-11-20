@@ -1,6 +1,7 @@
 const drawTrack = track => {
     const coordinates = track.points.map(p => [p.lat.toFixed(5), p.lon.toFixed(5)]);
-    const polyline = L.polyline(coordinates,
+	window.polyline?.remove(window.mymap)
+    window.polyline = L.polyline(coordinates,
 		{
 			weight: 6,
 			color: 'darkred'
