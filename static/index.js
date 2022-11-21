@@ -29,7 +29,7 @@ const listTracks = () => {
 		.map(track =>
 			[
 				track.fahrer_name,
-				track.fahrtzeug_polkz,
+				track.fahrzeug_polkz,
 				track.start_time && new Date(track.start_time).toLocaleDateString()
 			]
 			.join(' - ')

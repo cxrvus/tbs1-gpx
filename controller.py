@@ -11,7 +11,7 @@ def sync_tracks():
 	for i, fileinfo in enumerate(parsed_filenames):
 		track = {
 			'fahrer_name': fileinfo['name'],
-			'fahrtzeug_polkz': fileinfo['polkz'],
+			'fahrzeug_polkz': fileinfo['polkz'],
 			'start_time': None,
 			'points': []
 		}
@@ -26,7 +26,7 @@ def sync_tracks():
 				if(not track['start_time']):
 					track['start_time'] = points[0].time
 			else:
-				print(f"{progress}failiure - {fileinfo['filename']}")
+				print(f"{progress}failure - {fileinfo['filename']}")
 				points = []
 				continue
 
